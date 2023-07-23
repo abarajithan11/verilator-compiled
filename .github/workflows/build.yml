@@ -39,7 +39,7 @@ jobs:
         cd ~ 
         git clone https://github.com/verilator/verilator   # Only first time
 
-        # cd verilator
+        cd verilator
         # git pull         # Make sure git repository is up-to-date
         # git checkout stable      # Use most recent stable release
 
@@ -47,12 +47,15 @@ jobs:
         # ./configure      # Configure and create Makefile
         # make -j `nproc`  # Build Verilator itself (if error, try just 'make')
         # sudo make install
+
+        cd bin
+        rm -rf *_dbg
         
     - name: Push
       run: |
         cd /home/runner/work/verilator-compiled/verilator-compiled
         rm -rf ~/verilator/src
-        tar -zcvf ./verilator.tar.gz ~/verilator
+        tar -czvf verilator.tar.gz ~/verilator
         git add -A
         git config --global user.name "Aba"
         git config --global user.email abarajithan07@gmail.com"
