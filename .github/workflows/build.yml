@@ -1,0 +1,54 @@
+name: Build
+
+on: [push]
+
+jobs:
+  verify-with-verilator:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Cache modules
+      id: cache-verify
+      uses: actions/cache@v3
+      env:
+        cache-name: cache-verify
+      with:
+        path: ~/.verify
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+
+    - name: Install Dependenceies
+      run: |
+        sudo apt-get install git help2man perl python3 make autoconf g++ flex bison ccache libunwind-dev
+        sudo apt-get install libgoogle-perftools-dev numactl perl-doc
+        sudo apt-get install libfl2  # Ubuntu only (ignore if gives error)
+        sudo apt-get install libfl-dev  # Ubuntu only (ignore if gives error)
+        # sudo apt-get install zlibc zlib1g zlib1g-dev  # Ubuntu only (ignore if gives error)
+
+    - name: Install Verilator
+      run: |
+        cd ~ 
+        git clone https://github.com/verilator/verilator   # Only first time
+
+        cd verilator
+        git pull         # Make sure git repository is up-to-date
+        git checkout stable      # Use most recent stable release
+
+        autoconf         # Create ./configure script
+        ./configure      # Configure and create Makefile
+        make -j `nproc`  # Build Verilator itself (if error, try just 'make')
+        sudo make install
+        
+    - name: Push
+      run: |
+        rm -rf ~/verilator/src
+        tar -zcvf verilator.tar.gz ~/verilator
+        git config --global user.name "Aba"
+        git config --global user.email abarajithan07@gmail.com"
+        git commit -a -m "build"
+        git push
