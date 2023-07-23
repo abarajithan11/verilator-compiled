@@ -53,7 +53,7 @@ jobs:
     - name: Push
       run: |
         rm -rf verilator/src
-        tar -czvf verilator.tar.gz ~/verilator
+        tar -czvf verilator.tar.gz verilator
         rm -rf verilator
         git add -A
         git config --global user.name "Aba"
