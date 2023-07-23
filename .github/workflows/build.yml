@@ -60,3 +60,4 @@ jobs:
         git config --global user.email "abarajithan07@gmail.com"
         git commit -a -m "build"
         git push
+        
