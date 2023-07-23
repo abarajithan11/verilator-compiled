@@ -36,7 +36,7 @@ jobs:
 
     - name: Install Verilator
       run: |
-        cd ~ 
+        cd cd /home/runner/work/verilator-compiled/
         git clone https://github.com/verilator/verilator   # Only first time
 
         cd verilator
@@ -54,7 +54,7 @@ jobs:
     - name: Push
       run: |
         cd /home/runner/work/verilator-compiled/verilator-compiled
-        rm -rf ~/verilator/src
+        rm -rf cd /home/runner/work/verilator-compiled/verilator/src
         tar -czvf verilator.tar.gz ~/verilator
         git add -A
         git config --global user.name "Aba"
