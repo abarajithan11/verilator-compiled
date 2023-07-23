@@ -22,6 +22,10 @@ jobs:
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
+    - name: PWD
+      run: |
+        pwd
+
     - name: Install Dependenceies
       run: |
         sudo apt-get install git help2man perl python3 make autoconf g++ flex bison ccache libunwind-dev
