@@ -50,8 +50,10 @@ jobs:
         
     - name: Push
       run: |
+        cd /home/runner/work/verilator-compiled/verilator-compiled
         rm -rf ~/verilator/src
-        tar -zcvf verilator.tar.gz ~/verilator
+        tar -zcvf ./verilator.tar.gz ~/verilator
+        git add -A
         git config --global user.name "Aba"
         git config --global user.email abarajithan07@gmail.com"
         git commit -a -m "build"
