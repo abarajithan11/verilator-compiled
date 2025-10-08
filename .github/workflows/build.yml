@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   verify-with-verilator:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
 
     steps:
     - uses: actions/checkout@v2
@@ -60,3 +60,4 @@ jobs:
         git config --global user.email "abarajithan07@gmail.com"
         git commit -a -m "build"
         git push
+
