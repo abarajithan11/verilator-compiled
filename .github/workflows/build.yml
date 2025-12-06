@@ -40,7 +40,7 @@ jobs:
 
         cd verilator
         git pull         # Make sure git repository is up-to-date
-        git checkout stable    # Use most recent stable release
+        git checkout v5.024    # Use most recent stable release
 
         autoconf         # Create ./configure script
         ./configure      # Configure and create Makefile
@@ -60,5 +60,6 @@ jobs:
         git config --global user.email "abarajithan07@gmail.com"
         git commit -a -m "build"
         git push
+
 
 
